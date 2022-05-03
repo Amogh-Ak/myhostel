@@ -41,7 +41,6 @@ def areas_info(request, data=None):
 
     return render(request,"hostelmanagement/areaHostels.html",context)
 
-@method_decorator(login_required, name='dispatch')
 class Home(View):
     def get(self, request):
         hostels = Hostel.objects.all()

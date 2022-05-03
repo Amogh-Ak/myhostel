@@ -4,7 +4,7 @@ from hostelmanagement.forms import LoginForm
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path("home/",views.Home.as_view(),name="home"),
+    path("",views.Home.as_view(),name="home"),
     path("hostel/<slug:slug>",views.SingleHostelView.as_view(),name="hostel_details"),
     path("areas/<slug:data>",views.areas_info,name="areadata"),
     path("search/",views.searchRes,name="search"),
