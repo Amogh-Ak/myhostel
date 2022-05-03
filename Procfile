@@ -1,0 +1,1 @@
+web: gunicorn myhostel.wsgi --log-file -

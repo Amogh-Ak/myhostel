@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{hostel.name}} {% endblock  %}
+
+{% block content %}
+    <section>
+        <h2>{{ hostel.rent }}</h2>
+    </section>
+{% endblock  %}

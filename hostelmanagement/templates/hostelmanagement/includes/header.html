@@ -1,0 +1,38 @@
+{% load static %} 
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'hostelmanagement/Header.css' %}" />
+<link rel="stylesheet" href="{% static 'hostelmanagement/assets/css/mobile_responsive.css' %}">
+{% endblock %} 
+
+{% block content %}
+<header class="header-section">
+  <div class="header-left">
+    ℳ𝓎ℋ𝑜𝓈𝓉𝑒𝓁.𝒸𝑜𝓂
+  </div>
+  <div class="header-right">
+    {% if request.user.is_authenticated %}
+    <ul>
+      {% if request.user.is_Owner %}
+      null
+      {% else %}
+      <li><a href="#">Explore</a></li>
+      <li><a href="#">Rooms</a></li>
+      <li class="nav-item mx-2">
+        <a href="{% url 'logout' %}">Logout</a>
+      </li>
+      {% endif %}
+    </ul>
+    {% else %}
+    <ul>
+      <li>
+        <a href="{% url 'login' %}">Login</a>
+      </li>
+      <li>
+        <a href="{% url 'userRegister' %}">Sign Up</a>
+      </li>
+    </ul>
+    {% endif %}
+  </div>
+</header>
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends 'base.html' %} {% load static %} {% block css_files %}
+<link
+  rel="stylesheet"
+  href="{% static 'hostelmanagement/assets/css/dashboard.css' %}"
+  />
+  <link rel="stylesheet" href="{% static 'hostelmanagement/assets/css/mobile_responsive.css' %}">
+{% endblock %} {% block content %}
+<main>
+  
+  <div id="mysidebar">
+    {% include "hostelmanagement/includes/dashboardNav.html" %}
+  </div>
+
+  <div class="btn-ham">
+    <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+    <label for="openSidebarMenu" class="sidebarIconToggle">
+      <div class="spinner diagonal part-1"></div>
+      <div class="spinner horizontal"></div>
+      <div class="spinner diagonal part-2"></div>
+    </label>
+    <div id="sidebarMenu">
+      <div class="dash-Nav">
+        {% include "hostelmanagement/includes/dashboardNav.html" %}
+      </div>
+    </div>
+  </div>
+
+  <section class="dashboard-section">
+    <div class="owner-section">
+      <div class="owner-block">
+        <div class="owner-img-div">
+          <img src={% static 'hostelmanagement/assets/images/hostelBG.jpg'%}
+          alt="">
+        </div>
+        <a href="#">{{request.user}}</a>
+      </div>
+    </div>
+    <div class="header">
+      <div class="icon-div">
+        <span class="material-symbols-outlined"> location_city </span>
+      </div>
+      <div class="header-name">
+        <h4>Hostels Management</h4>
+      </div>
+      <form method="GET" class="search-div">
+        <input type="text" placeholder="Search" name="search-query" />
+        <button type="submit">
+          <i class="fa fa-search-plus" aria-hidden="true"></i>
+        </button>
+      </form>
+      <div class="header-btn">
+        <button><a href="{% url 'add-hostel' %}">Add Hostel</a></button>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="tble">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Hostel Type</th>
+            <th>Room Id</th>
+            <th>Views</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        {% for hostel in hostels %}
+        <tr>
+          <td>{{hostel.name}}</td>
+          <td>{{hostel.location}}</td>
+          <td>{{hostel.type_of_hostel}}</td>
+          <td>{{hostel.room.room_number}}</td>
+          <td>{{hostel.views}}</td>
+          <td>
+            <div class="actions-div">
+              <a href="{% url 'hostels-update' hostel.id %}">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              </a>
+              <a href="{% url 'hostels-delete' hostel.id %}">
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+              </a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </section>
+</main>
+{% endblock %}

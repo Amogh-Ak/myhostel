@@ -1,0 +1,226 @@
+/* DASHBOARD-ROOM */
+@media screen and (max-width: 600px) {
+
+    .header-section {
+        position: fixed;
+    }
+
+    #mysidebar {
+        display: none;
+    }
+
+    .btn-ham {
+        display: block;
+        width: max-content;
+        height: max-content;
+    }
+
+    #sidebarMenu {
+        height: 100%;
+        position: fixed;
+        left: 0;
+        width: 250px;
+        margin-top: 0px;
+        transform: translateX(-250px);
+        transition: transform 250ms ease-in-out;
+        background: transparent;
+        z-index: 99;
+    }
+
+    .dash-Nav {
+        height: max-content;
+        margin-top: 50%;
+    }
+
+    input[type="checkbox"]:checked~#sidebarMenu {
+        transform: translateX(0);
+    }
+
+    input[type=checkbox] {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        display: none;
+    }
+
+    .sidebarIconToggle {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        cursor: pointer;
+        position: absolute;
+        z-index: 999;
+        height: 100%;
+        width: 100%;
+        top: 50px;
+        left: 15px;
+        height: 22px;
+        width: 22px;
+    }
+
+    .spinner {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        background-color: black;
+    }
+
+    .horizontal {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        position: relative;
+        float: left;
+        margin-top: 3px;
+    }
+
+    .diagonal.part-1 {
+        position: relative;
+        transition: all 0.3s;
+        box-sizing: border-box;
+        float: left;
+    }
+
+    .diagonal.part-2 {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        position: relative;
+        float: left;
+        margin-top: 3px;
+    }
+
+    input[type=checkbox]:checked~.sidebarIconToggle>.horizontal {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        opacity: 0;
+    }
+
+    input[type=checkbox]:checked~.sidebarIconToggle>.diagonal.part-1 {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        transform: rotate(135deg);
+        margin-top: 8px;
+    }
+
+    input[type=checkbox]:checked~.sidebarIconToggle>.diagonal.part-2 {
+        transition: all 0.3s;
+        box-sizing: border-box;
+        transform: rotate(-135deg);
+        margin-top: -9px;
+    }
+
+    .dashboard-section {
+        width: 100%;
+        margin: 3rem 1rem;
+    }
+
+    .dashboard-block {
+        margin: 3rem 1rem;
+    }
+
+    .header .header-name {
+        margin-left: -5%;
+    }
+
+    .header .header-name h4 {
+        padding: 0;
+        font-size: 0.9rem;
+    }
+
+    .header .search-div {
+        /* display: none; */
+        padding: 5px;
+        width: 140px;
+    }
+
+    .header .search-div input {
+        width: 70%
+    }
+
+    .header .header-btn {
+        padding: 0;
+        border-radius: 20px;
+    }
+
+    .header .header-btn button a {
+        font-size: 10px;
+        letter-spacing: 0px;
+    }
+
+}
+
+/* END DASHBOARD_ROOM */
+
+/* HOME PAGE */
+@media screen and (max-width: 600px) {
+    .bg-img {
+        height: 500px;
+        width: 100%;
+    }
+
+    .overlay {
+        height: 500px;
+        width: 100%;
+    }
+
+    .home-section {
+        top: 15%;
+        left: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    .home-section h1 {
+        font-size: 1rem;
+    }
+
+    .welcome-tag h2 {
+        font-size: 1rem;
+    }
+
+    .search-div {
+        grid-template-columns: 170px 150px 130px;
+        margin: 0 auto;
+    }
+
+    .search-div .search-block {
+        overflow: hidden;
+    }
+
+    .search-block i {
+        font-size: 1.3rem;
+        padding-top: 0.7rem;
+    }
+
+    .search-div .search-block .loc {
+        width: 100%;
+    }
+
+    .search-box {
+        padding: 0.3rem 0rem;
+        margin: 0;
+    }
+
+    .search-box button {
+        font-size: 0.8rem;
+        width: 100%;
+        margin-right: 5px;
+    }
+
+    .search-box i {
+        padding: 0.2rem;
+    }
+
+    .rooms-list {
+        grid-template-columns: 220px 220px;
+        padding: 1.5rem 1rem;
+    }
+
+
+
+    .pop-list {
+        grid-template-columns: 220px 220px;
+        padding: 1.5rem 0;
+    }
+}
+
+/*END HOME PAGE */

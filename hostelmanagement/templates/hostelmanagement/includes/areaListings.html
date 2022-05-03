@@ -1,0 +1,30 @@
+{% load static %}
+
+{% block content %}
+<div class="explore-tag"><h1>Explore Locations</h1>
+    <p>Some Popular Locations from the City.</p></div>
+    <div class="rooms-list">
+        <a href="{% url 'areadata' 'Saptapur' %}">
+          <div class="wrapper">
+            <img src={% static 'hostelmanagement/assets/images/hostelBG.jpg'%} alt="">
+            <div class="details">
+              <div class="upper"><button>Saptapur</button></div>
+              <div class="lower"><h4>Saptapur</h4></div>
+            </div>
+          </div>
+        </a>
+        <a href="{% url 'areadata' 'Malmaddi' %}">
+            <div class="wrapper">
+                <img src={% static 'hostelmanagement/assets/images/hostelBG.jpg'%} alt="">
+                <div class="details">
+                    <div class="upper"><button>Malmaddi</button></div>
+                    <div class="lower"><h4>Malmaddi</h4></div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="all-locs">
+      <button>View All Locations</button><i class="fas fa-arrow-circle-right"></i>
+    </div>
+{% endblock  %}

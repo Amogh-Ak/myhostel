@@ -1,0 +1,26 @@
+{% load static %}
+
+{% block content %}
+<div class="pop-wrapper">
+    <div class="img-div"><img src="{{hostel.images.url}}" alt=""></div>
+    <div class="pop-details">
+      <a href="{% url 'hostel_details' hostel.slug %}"><h3>{{hostel.name}}</h3></a>
+      <div class="loc-div">
+        <i class="fas fa-map-marker-alt"></i>
+        <p>{{hostel.location}}</p>
+      </div>
+      <h4>{{hostel.rent}}</h4>
+      <div class="facilities">
+        <h3>Facilities :</h3>
+        <div class="fac-list">
+          <i class="fas fa-arrow-right"></i>
+          <i class="fas fa-arrow-right"></i>
+          <i class="fas fa-arrow-right"></i>
+          <i class="fas fa-arrow-right"></i>
+          <i class="fas fa-arrow-right"></i>
+          +17more
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock  %}

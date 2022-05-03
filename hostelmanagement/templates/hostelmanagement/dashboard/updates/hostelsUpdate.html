@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'hostelmanagement/assets/css/dashboard.css' %}" />
+<link rel="stylesheet" href="{% static 'hostelmanagement/assets/css/mobile_responsive.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main>
+      
+      <div id="mysidebar">
+        {% include "hostelmanagement/includes/dashboardNav.html" %}
+      </div>
+    
+      <div class="btn-ham">
+        <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+        <label for="openSidebarMenu" class="sidebarIconToggle">
+          <div class="spinner diagonal part-1"></div>
+          <div class="spinner horizontal"></div>
+          <div class="spinner diagonal part-2"></div>
+        </label>
+        <div id="sidebarMenu">
+          <div class="dash-Nav">
+            {% include "hostelmanagement/includes/dashboardNav.html" %}
+          </div>
+        </div>
+      </div>
+
+        <section class="dashboard-section">
+            <div class="owner-section">
+                <div class="owner-block">
+                    <div class="owner-img-div">
+                        <img src={% static 'hostelmanagement/assets/images/hostelBG.jpg'%} alt="">
+                    </div>
+                    <a href="#">{{request.user}}</a>
+                </div>
+            </div>
+            <div class="header">
+                <div class="icon-div">
+                    <span class="material-symbols-outlined">
+                        location_city
+                    </span> 
+                </div>
+                <div class="header-name">
+                    <h4>Hostels Management</h4>
+                </div>
+                <div class="search-div">
+                    <input type="text" placeholder="Search">
+                    <i class="fa fa-search-plus" aria-hidden="true"></i>
+                </div>
+                <div class="header-btn">
+                    <button onclick="switchVisible();">Add Hostel</button>
+                </div>
+            </div>
+            <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-grp">
+                        <div class="input-wrapper">
+                            <input
+                              type="text"
+                              name="name"
+                              required
+                              value="{{form.name.value}}"
+                            />
+                            <label htmlFor="name" class="label-name">
+                              <span class="content-name">{{form.name.label}}</span>
+                            </label>
+                          </div>
+                          <div class="input-wrapper">
+                            <input
+                              type="text"
+                              name="location"
+                              required
+                              value="{{form.location.value}}"
+                            />
+                            <label htmlFor="name" class="label-name">
+                              <span class="content-name">{{form.location.label}}</span>
+                            </label>
+                          </div>
+                          <div class="input-wrapper">
+                            <input
+                              type="text"
+                              name="type_of_hostel"
+                              required
+                              value="{{form.type_of_hostel.value}}"
+                            />
+                            <label htmlFor="name" class="label-name">
+                              <span class="content-name">{{form.type_of_hostel.label}}</span>
+                            </label>
+                          </div>
+                    </div>
+                    <div class="form-grp">
+                        <div class="input-wrapper">
+                            <input
+                              type="text"
+                              name="description"
+                              required
+                              value="{{form.description.value}}"
+                            />
+                            <label htmlFor="name" class="label-name">
+                              <span class="content-name">{{form.description.label}}</span>
+                            </label>
+                          </div>
+                          <div class="input-wrapper">
+                            <input
+                              type="text"
+                              name="details"
+                              required
+                              value="{{form.details.value}}"
+                            />
+                            <label htmlFor="name" class="label-name">
+                              <span class="content-name">{{form.details.label}}</span>
+                            </label>
+                          </div>
+                          <div class="input-wrapper">
+                            <div class="img-section">
+                              <div class="img-display-div">
+                                <img src="{{form.images.value.url}}" alt="Hostel Images" />
+                              </div>
+                              <div class="button-wrap">
+                                <span class="button" for="upload"
+                                  ><i class="fa fa-cloud-upload" aria-hidden="true">
+                                    Upload Image</i
+                                  ></span
+                                >
+                                <input id="upload" name="images" type="file" />
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="form-grp">
+                        <div class="input-wrapper">
+                            <input
+                              type="text"
+                              name="facilities"
+                              required
+                              value="{{form.facilities.value}}"
+                            />
+                            <label htmlFor="name" class="label-name">
+                              <span class="content-name">{{form.facilities.label}}</span>
+                            </label>
+                          </div>
+                          <div class="input-wrapper">
+                            <input
+                              type="text"
+                              name="room"
+                              required
+                              value="{{form.room.value}}"
+                            />
+                            <label htmlFor="name" class="label-name">
+                              <span class="content-name">{{form.room.label}}</span>
+                            </label>
+                          </div>
+                          <div class="input-wrapper">
+                            <input
+                              type="text"
+                              name="zipcode"
+                              required
+                              value="{{form.zipcode.value}}"
+                            />
+                            <label htmlFor="name" class="label-name">
+                              <span class="content-name">{{form.zipcode.label}}</span>
+                            </label>
+                          </div>
+                    </div>
+                    <div class="btn-submit">
+                        <input type="submit" value="Update Hostel" />
+                      </div>
+                      {% if form.non_field_errors %} {% for error in form.non_field_errors %}
+                      <p class="alert alert-danger my-3">{{error}}</p>
+                      {% endfor %} {% endif %}
+                </form>
+        </section>
+    </main>
+{% endblock  %}

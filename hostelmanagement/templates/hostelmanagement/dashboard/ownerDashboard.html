@@ -1,0 +1,93 @@
+{% extends 'base.html' %} {% load static %} {% block css_files %}
+<link
+  rel="stylesheet"
+  href="{% static 'hostelmanagement/assets/css/dashboard.css' %}"
+/>
+<link rel="stylesheet" href="{% static 'hostelmanagement/assets/css/mobile_responsive.css' %}">
+{% endblock %} {% block content %}
+<main>
+  
+  <div id="mysidebar">
+    {% include "hostelmanagement/includes/dashboardNav.html" %}
+  </div>
+
+  <div class="btn-ham">
+    <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+    <label for="openSidebarMenu" class="sidebarIconToggle">
+      <div class="spinner diagonal part-1"></div>
+      <div class="spinner horizontal"></div>
+      <div class="spinner diagonal part-2"></div>
+    </label>
+    <div id="sidebarMenu">
+      <div class="dash-Nav">
+        {% include "hostelmanagement/includes/dashboardNav.html" %}
+      </div>
+    </div>
+  </div>
+
+  <section class="dashboard-section">
+    <div class="dashboard-block">
+      <h4>Welcome {{request.user}}!</h4>
+      <div class="box-list">
+        <li>
+          <h5>Total Hostels</h5>
+          <span>21</span>
+        </li>
+        <li>
+          <h5>Total Rooms</h5>
+          <span>21</span>
+        </li>
+        <li>
+          <h5>Total Facilities</h5>
+          <span>21</span>
+        </li>
+      </div>
+    </div>
+    {% if data %}
+    <div class="chart-div">
+      <canvas id="myChart"></canvas>
+    </div>
+    {% else %}
+    <p>Welcome {{request.user}} to your dashboard.</p>
+    {% endif %}
+    <script>
+      const ctx = document.getElementById('myChart').getContext('2d');
+      const myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: [{% for d in data %} '{{d.hostel}}' {% endfor %}],
+              datasets: [{
+                  label: '# of Rooms',
+                  data: [{% for d in data %} '{{d.rooms}}' {% endfor %}],
+                  backgroundColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(255, 159, 64, 1)'
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(255, 159, 64, 1)'
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              maintainAspectRatio:false,
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+    </script>
+  </section>
+</main>
+{% endblock %}

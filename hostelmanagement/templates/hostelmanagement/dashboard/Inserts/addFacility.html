@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'hostelmanagement/assets/css/dashboard.css' %}" />
+{% endblock %}
+
+{% block content %}
+    <main>
+        
+        <div id="mysidebar">
+            {% include "hostelmanagement/includes/dashboardNav.html" %}
+          </div>
+        
+          <div class="btn-ham">
+            <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+            <label for="openSidebarMenu" class="sidebarIconToggle">
+              <div class="spinner diagonal part-1"></div>
+              <div class="spinner horizontal"></div>
+              <div class="spinner diagonal part-2"></div>
+            </label>
+            <div id="sidebarMenu">
+              <div class="dash-Nav">
+                {% include "hostelmanagement/includes/dashboardNav.html" %}
+              </div>
+            </div>
+          </div>
+
+        <section class="dashboard-section">
+            <div class="owner-section">
+                <div class="owner-block">
+                    <div class="owner-img-div">
+                        <img src={% static 'hostelmanagement/assets/images/hostelBG.jpg'%} alt="">
+                    </div>
+                    <a href="#">{{request.user}}</a>
+                </div>
+            </div>
+            <div class="header">
+                <div class="icon-div">
+                    <span class="material-symbols-outlined">
+                        featured_play_list
+                    </span> 
+                </div>
+                <div class="header-name">
+                    <h4>Facilities</h4>
+                </div>
+                <form method="GET" class="search-div">
+                    <input type="text" placeholder="Search" name="search-query">
+                    <button type="submit"><i class="fa fa-search-plus" aria-hidden="true"></i></button>
+                </form>
+                <div class="header-btn">
+                    <button><a href="{% url 'add-facility' %}">Add a Facility</a></button>
+                </div>
+            </div>
+                <form method="POST">
+                    {% if messages %}
+            {% for message in messages %}
+                <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5"{% endif %}>{{message}}</p>
+            {% endfor %}
+        {% endif %}
+                    {% csrf_token %}
+                    <div>
+                        <input type="text" name="facility">
+                    </div>
+                    <input type="submit" value="Add Facility">
+                </form>
+        </section>
+    </main>
+{% endblock  %}

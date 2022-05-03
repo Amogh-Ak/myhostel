@@ -1,0 +1,69 @@
+{% load static %}
+
+{% block content %}
+<section class="side-nav">
+    <div class="img-div">
+        <img src={% static 'hostelmanagement/assets/images/hostelBG.jpg'%} alt="">
+    </div>
+    <div class="nav-list">
+        <ul>
+            <li>
+                <a href={% url 'dashboard' %}>
+                    <span class="material-symbols-outlined">
+                        dashboard
+                    </span> 
+                    <h6>Dashboard</h6>
+                </a>
+            </li>
+            <li>
+                <a href={% url 'manage-hostels' %}>
+                    <span class="material-symbols-outlined">
+                        location_city
+                    </span>
+                    <h6>Manage Hostels</h6>
+                </a>
+            </li>
+            <li>
+                <a href={% url 'rooms' %}>
+                    <span class="material-symbols-outlined">
+                        meeting_room
+                    </span>
+                    <h6>Rooms</h6>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'hostel-details' %}">
+                    <span class="material-symbols-outlined">
+                        details
+                    </span>
+                    <h6>Hostel Details</h6>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'facilities' %}">
+                    <span class="material-symbols-outlined">
+                        featured_play_list
+                    </span>
+                    <h6>Facilities</h6>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'profile' %}">
+                    <span class="material-symbols-outlined">
+                        account_circle
+                    </span>
+                    <h6>Profile</h6>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}">
+                    <span class="material-symbols-outlined">
+                        logout
+                    </span>
+                    <h6>Logout</h6>
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>
+{% endblock  %}

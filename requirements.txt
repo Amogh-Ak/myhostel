@@ -1,0 +1,13 @@
+asgiref==3.5.0
+Django==4.0.4
+django-filter==21.1
+django-phonenumber-field==6.1.0
+django-phonenumbers==1.0.1
+django-widget-tweaks==1.4.12
+gunicorn==20.1.0
+mpmath==1.2.1
+phonenumbers==8.12.47
+Pillow==9.1.0
+sqlparse==0.4.2
+sympy==1.10.1
+tzdata==2022.1

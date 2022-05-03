@@ -1,0 +1,116 @@
+{% extends 'base.html' %} {% load static %} {% block css_files %}
+<link
+  rel="stylesheet"
+  href="{% static 'hostelmanagement/assets/css/dashboard.css' %}"
+/>
+<link rel="stylesheet" href="{% static 'hostelmanagement/assets/css/mobile_responsive.css' %}">
+{% endblock %} {% block content %}
+<main>
+  
+  <div id="mysidebar">
+    {% include "hostelmanagement/includes/dashboardNav.html" %}
+  </div>
+
+  <div class="btn-ham">
+    <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+    <label for="openSidebarMenu" class="sidebarIconToggle">
+      <div class="spinner diagonal part-1"></div>
+      <div class="spinner horizontal"></div>
+      <div class="spinner diagonal part-2"></div>
+    </label>
+    <div id="sidebarMenu">
+      <div class="dash-Nav">
+        {% include "hostelmanagement/includes/dashboardNav.html" %}
+      </div>
+    </div>
+  </div>
+
+  <section class="dashboard-section">
+    <div class="upper-block">
+      {% if Owner.profilePic %}
+      <div class="owner-profile-img">
+        <img src="{{Owner.profilePic.url}}" alt="" />
+      </div>
+      {% else %}
+      <div class="owner-profile-img">
+        <img src={% static 'hostelmanagement/assets/images/hostelBG.jpg'%}
+        alt="" />
+      </div>
+      {% endif %}
+    </div>
+    <div class="lower-block">
+      <h3>{{request.user}} Info</h3>
+      <form method="POST" novalidate enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+          <div class="form-grp">
+            <div class="input-wrapper">
+              <input
+                type="text"
+                name="name"
+                required
+                value="{{form.name.value}}"
+              />
+              <label htmlFor="name" class="label-name">
+                <span class="content-name">{{form.name.label}}</span>
+              </label>
+            </div>
+            <div class="input-wrapper">
+              <input
+                type="text"
+                name="address"
+                required
+                value="{{form.address.value}}"
+              />
+              <label htmlFor="name" class="label-name">
+                <span class="content-name">{{form.address.label}}</span>
+              </label>
+            </div>
+          </div>
+          <div class="form-grp">
+            <div class="input-wrapper imgDiv">
+              <input
+                type="text"
+                name="contact_num"
+                required
+                value="{{form.contact_num.value}}"
+              />
+              <label htmlFor="name" class="label-name">
+                <span class="content-name">{{form.contact_num.label}}</span>
+              </label>
+            </div>
+            <div class="input-wrapper">
+              <div class="img-section">
+                {% if form.profilePic.value %}
+                <div class="img-display-div">
+                  <img src="{{form.profilePic.value.url}}" alt="ProfilePic" />
+                </div>
+                {% else %}
+                <div class="img-display-div">
+                  <img src={% static 'hostelmanagement/assets/images/hostelBG.jpg'%}
+                  alt="ProfilePic" />
+                </div>
+                {% endif %}
+                <div class="button-wrap">
+                  <span class="button" for="upload"
+                    ><i class="fa fa-cloud-upload" aria-hidden="true">
+                      Upload Image</i
+                    ></span
+                  >
+                  <input id="upload" name="profilePic" type="file" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="btn-submit">
+          <input type="submit" value="Update Profile" />
+        </div>
+        {% if form.non_field_errors %} {% for error in form.non_field_errors %}
+        <p class="alert alert-danger my-3">{{error}}</p>
+        {% endfor %} {% endif %}
+      </form>
+    </div>
+  </section>
+</main>
+{% endblock %}

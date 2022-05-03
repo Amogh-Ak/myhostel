@@ -1,0 +1,120 @@
+{% extends 'base.html' %} {% load static %} {% block css_files %}
+<link
+  rel="stylesheet"
+  href="{% static 'hostelmanagement/assets/css/dashboard.css' %}"
+/>
+<link rel="stylesheet" href="{% static 'hostelmanagement/assets/css/mobile_responsive.css' %}">
+{% endblock %} {% block content %}
+<main>
+  
+  <div id="mysidebar">
+    {% include "hostelmanagement/includes/dashboardNav.html" %}
+  </div>
+
+  <div class="btn-ham">
+    <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+    <label for="openSidebarMenu" class="sidebarIconToggle">
+      <div class="spinner diagonal part-1"></div>
+      <div class="spinner horizontal"></div>
+      <div class="spinner diagonal part-2"></div>
+    </label>
+    <div id="sidebarMenu">
+      <div class="dash-Nav">
+        {% include "hostelmanagement/includes/dashboardNav.html" %}
+      </div>
+    </div>
+  </div>
+
+  <section class="dashboard-section">
+    <div class="owner-section">
+      <div class="owner-block">
+        <div class="owner-img-div">
+          <img src={% static 'hostelmanagement/assets/images/hostelBG.jpg'%}
+          alt="">
+        </div>
+        <a href="#">{{request.user}}</a>
+      </div>
+    </div>
+    <div class="header">
+      <div class="icon-div">
+        <span class="material-symbols-outlined"> details </span>
+      </div>
+      <div class="header-name">
+        <h4>Hostel Details</h4>
+      </div>
+      <form method="GET" class="search-div">
+        <input type="text" placeholder="Search" name="search-query" />
+        <button type="submit">
+          <i class="fa fa-search-plus" aria-hidden="true"></i>
+        </button>
+      </form>
+      <div class="header-btn">
+        <button >Add Details</button>
+      </div>
+    </div>
+      <form method="POST" class="form-block">
+        {% if messages %}
+            {% for message in messages %}
+                <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5"{% endif %}>{{message}}</p>
+            {% endfor %}
+        {% endif %}
+        {% csrf_token %}
+        <div class="form-grp">
+          <div class="input-wrapper">
+            <input type="text" name="notice_period" required />
+            <label htmlFor="name" class="label-name">
+              <span class="content-name">{{form.notice_period.label}}</span>
+            </label>
+          </div>
+          <div class="input-wrapper">
+            <input type="text" name="near_by" required />
+            <label htmlFor="name" class="label-name">
+              <span class="content-name">{{form.near_by.label}}</span>
+            </label>
+          </div>
+          <div class="input-checkbox-wrapper">
+            <div class="label-name">
+              <span class="content">{{form.visitors_allowed.label}}</span>
+            </div>
+            <div class="checkbox-div">
+              <input
+                type="checkbox"
+                name="visitors_allowed"
+                id="visitors_allowed"
+                required
+              />
+            </div>
+          </div>
+        </div>
+        <div class="form-grp">
+          <div class="input-wrapper">
+            <input type="text" name="security_deposit" required />
+            <label htmlFor="name" class="label-name">
+              <span class="content-name">{{form.security_deposit.label}}</span>
+            </label>
+          </div>
+          <div class="input-checkbox-wrapper">
+            <div class="label-name">
+              <span class="content">{{form.warden.label}}</span>
+            </div>
+            <div class="checkbox-div">
+              <input type="checkbox" name="warden" id="warden" required />
+            </div>
+          </div>
+          <div class="input-wrapper">
+            <input type="text" name="restrictions" required />
+            <label htmlFor="name" class="label-name">
+              <span class="content-name">{{form.restrictions.label}}</span>
+            </label>
+          </div>
+        </div>
+        <div class="btn-submit">
+          <input type="submit" value="Add Details" />
+        </div>
+        {% if form.non_field_errors %} {% for error in form.non_field_errors %}
+        <p class="alert alert-danger my-3">{{error}}</p>
+        {% endfor %} {% endif %}
+      </form>
+  </section>
+</main>
+{% endblock %}

@@ -1,0 +1,20 @@
+.footer-section {
+    background: #2b2b35;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem;
+}
+
+.footer-section .footer-block {
+    width: max-content;
+    margin: 0 auto;
+    letter-spacing: 4px;
+    color: whitesmoke;
+}
+
+.footer-block span {
+    color: #b621fe;
+    letter-spacing: 2px;
+}
