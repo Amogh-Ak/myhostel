@@ -39,3 +39,11 @@
     color: whitesmoke;
     letter-spacing: 1px;
 }
+
+.header-long {
+    display: flex;
+}
+
+.dropdown {
+    display: none;
+}
