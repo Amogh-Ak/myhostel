@@ -12,3 +12,4 @@ sqlparse==0.4.2
 sympy==1.10.1
 tzdata==2022.1
 whitenoise==6.0.0
+win32
