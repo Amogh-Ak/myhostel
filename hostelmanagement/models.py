@@ -4,6 +4,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 class CustomUser(AbstractUser):
     is_Owner = models.BooleanField("Owner",default=False)
+    is_Student = models.BooleanField("Student",default=False)
 
 HOSTEL_TYPES = (
     ('Mens Hostel','Mens Hostel'),
@@ -42,6 +43,7 @@ class HostelDetail(models.Model):
 
 class Room(models.Model):
     room_number = models.IntegerField()
+    hostel_name = models.CharField(max_length=100)
     usr = models.ForeignKey(CustomUser,on_delete=models.CASCADE,default=None)
     number_of_students = models.IntegerField()
     status = models.CharField(choices=ROOM_CHOICES ,max_length=100)
@@ -54,7 +56,7 @@ class Room(models.Model):
 class OwnerDetail(models.Model):
     usr = models.ForeignKey(CustomUser,on_delete=models.CASCADE,default=None)
     name = models.CharField(max_length=150)
-    profilePic = models.ImageField(upload_to="ownerProfile",default=None)
+    profilePic = models.ImageField(upload_to='ownerimage')
     address = models.CharField(max_length=200)
     contact_num = PhoneNumberField(null=False, blank=False, unique=True)
 
@@ -73,13 +75,13 @@ class Hostel(models.Model):
     slug = models.SlugField(unique=True)
     location = models.CharField(max_length=200)
     zipcode = models.IntegerField()
-    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    room = models.ManyToManyField(Room)
     type_of_hostel = models.CharField(choices=HOSTEL_TYPES, max_length=50)
     food_facility = models.CharField(choices=FOOD_STATUS,max_length=50, default="With Food",null=True)
     views = models.IntegerField(default=0)
     description = models.TextField(max_length=1000)
-    details = models.ManyToManyField(HostelDetail)
-    images = models.ImageField(upload_to='hostelImage')
+    details = models.ForeignKey(HostelDetail, on_delete=models.CASCADE)
+    images = models.ImageField(upload_to='hostelimage')
     facilities = models.ManyToManyField(Facilities)
     status = models.CharField(max_length=50,choices=STATUS_CHOICES,default='Not Approved.')
 

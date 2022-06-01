@@ -52,7 +52,7 @@
         <button >Add Hostel</button>
       </div>
     </div>
-      <form method="POST" enctype="multipart/form-data">
+      <form method="POST" enctype="multipart/form-data" class="form-block">
         {% if messages %}
             {% for message in messages %}
                 <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5"{% endif %}>{{message}}</p>
@@ -80,15 +80,9 @@
                 <span class="content-name">{{form.location.label}}</span>
               </label>
             </div>
-            <div class="input-wrapper">
-              <input
-                type="text"
-                name="type_of_hostel"
-                required
-              />
-              <label htmlFor="name" class="label-name">
-                <span class="content-name">{{form.type_of_hostel.label}}</span>
-              </label>
+            <div class="input-wrapper-2">
+              <label for="type_of_hostel">Hostel Type</label>
+              {{form.type_of_hostel}}
             </div>
       </div>
       <div class="form-grp">
@@ -102,52 +96,36 @@
                 <span class="content-name">{{form.description.label}}</span>
               </label>
             </div>
-            <div class="input-wrapper">
-              <input
-                type="text"
-                name="details"
-                required                
-              />
-              <label htmlFor="name" class="label-name">
-                <span class="content-name">{{form.details.label}}</span>
-              </label>
+            <div class="input-wrapper-2">
+              <label for="details">Details:</label>
+              <select name="details" id="details">
+                {% for hD in hostelDetails %}
+                  <option value={{hD.near_by}}>{{hD.near_by}}</option>
+                {% endfor %}
+              </select>
+              
             </div>
-            <div class="input-wrapper">
-              <div class="img-section">
-                <div class="img-display-div">
-                   <img src={% static 'hostelmanagement/assets/images/hostelBG.jpg'%} alt="Hostel Images" />
-                </div>
-                <div class="button-wrap">
-                  <span class="button" for="upload"
-                    ><i class="fa fa-cloud-upload" aria-hidden="true">
-                      Upload Image</i
-                    ></span
-                  >
-                  <input id="upload" name="images" type="file" />
-                </div>
-              </div>
+            <div class="input-wrapper-2">
+              <label for="food_facility">Food Type</label>
+              {{form.food_facility}}
             </div>
       </div>
       <div class="form-grp">
-          <div class="input-wrapper">
-              <input
-                type="text"
-                name="facilities"
-                required
-              />
-              <label htmlFor="name" class="label-name">
-                <span class="content-name">{{form.facilities.label}}</span>
-              </label>
+          <div class="input-wrapper-2">
+            <label for="facilities">Facilities:</label>
+            <select name="facilities" id="facilities" multiple>
+              {% for facility in facilities %}
+                <option value="{{facility.facility}}">{{facility.facility}}</option>
+              {% endfor %}
+          </select>
             </div>
-            <div class="input-wrapper">
-              <input
-                type="text"
-                name="room"
-                required
-              />
-              <label htmlFor="name" class="label-name">
-                <span class="content-name">{{form.room.label}}</span>
-              </label>
+            <div class="input-wrapper-2">
+              <label for="room">Rooms:</label>
+            <select name="room" id="room" multiple>
+              {% for room in rooms %}
+                <option value={{room.room_number}}>{{room.room_number}}</option>
+              {% endfor %}
+          </select>
             </div>
             <div class="input-wrapper">
               <input
@@ -160,8 +138,31 @@
               </label>
             </div>
       </div>
+      <div class="form-grp">
+        <div class="input-block">
+            <div class="input-wrapper">
+                <div class="img-section">
+                    <div class="img-display-div">
+                        <img src={% static 'hostelmanagement/assets/images/hostelBG.jpg'%}
+                        alt="">
+                    </div>
+                    <div class="button-wrap">
+                        <span class="button" for="upload"
+                        ><i class="fa fa-cloud-upload" aria-hidden="true">
+                            Upload Image</i
+                            ></span
+                            >
+                    <input id="upload" name="hostelimage" type="file" />
+                    </div>
+                </div>
+            </div>
+            {% for err in form.room_imgs.errors %}
+                <p class="alert alert-danger my-3">{{err}}</p>
+            {% endfor %}
+        </div>
+    </div>
       <div class="btn-submit">
-          <input type="submit" value="Update Hostel" />
+          <input type="submit" value="Add Hostel" />
         </div>
         {% if form.non_field_errors %} {% for error in form.non_field_errors %}
         <p class="alert alert-danger my-3">{{error}}</p>

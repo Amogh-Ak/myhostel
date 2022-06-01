@@ -42,9 +42,13 @@
         <h4>Rooms Management</h4>
       </div>
       <form method="GET" class="search-div">
-        <input type="text" placeholder="Search" name="search-query" />
+        <select type="text" name="search-query">
+          {% for hostel in hostels %}
+            <option value={{hostel.name}}>{{hostel.name}}</option>
+          {% endfor %}
+        </select>
         <button type="submit">
-          <i class="fa fa-search-plus" aria-hidden="true"></i>
+          <i class="fa fa-angle-double-right" aria-hidden="true"></i>
         </button>
       </form>
       <div class="header-btn">
@@ -56,6 +60,7 @@
         <thead>
           <tr>
             <th>Room Number</th>
+            <th>Hostel Name</th>
             <th>Num Of Students</th>
             <th>Room Cost</th>
             <th>Status</th>
@@ -65,6 +70,7 @@
         {% for room in rooms %}
         <tr>
           <td>{{room.room_number}}</td>
+          {% if room.hostel_name %} <td>{{room.hostel_name}}</td> {% else %} <td>---</td> {% endif %}
           <td>{{room.number_of_students}}</td>
           <td>{{room.room_cost}}</td>
           <td>{{room.status}}</td>

@@ -8,7 +8,7 @@
 {% block content %}
 <header class="header-section">
   <div class="header-left">
-    ℳ𝓎ℋ𝑜𝓈𝓉𝑒𝓁.𝒸𝑜𝓂
+    <a href={% url 'home' %}>ℳ𝓎ℋ𝑜𝓈𝓉𝑒𝓁.𝒸𝑜𝓂</a>
   </div>
   <div class="header-right">
     {% if request.user.is_authenticated %}
@@ -17,8 +17,7 @@
       null
       {% else %}
       <div class="header-long">
-        <li><a href="#">Explore</a></li>
-        <li><a href="#">Rooms</a></li>
+        <li><a href="#">Explore</a></li> 
         <li class="nav-item mx-2">
           <a href="{% url 'logout' %}">Logout</a>
         </li>
@@ -27,7 +26,6 @@
         <button class="dropbtn"><i class="fa fa-user-circle-o" aria-hidden="true"></i></button>
         <div class="dropdown-content">
           <a href="#">Explore</a>
-          <a href="#">Rooms</a>
           <a href="{% url 'logout' %}">Logout</a>
         </div>
       </div>

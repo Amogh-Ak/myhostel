@@ -294,6 +294,10 @@
         margin: 1rem 0;
     }
 
+    .sb-btn {
+        width: auto;
+    }
+
     .search-box {
         width: 100%;
     }

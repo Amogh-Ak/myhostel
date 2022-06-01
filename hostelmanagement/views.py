@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from multiprocessing import context
 from django import http
 from django.shortcuts import render, redirect
@@ -7,9 +8,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from hostelmanagement.models import Hostel, CustomUser, Room, Facilities, HostelDetail, OwnerDetail
-from django.views.generic.edit import CreateView
+from django.views.generic import DetailView
 from django.http.response import HttpResponseRedirect
 from .filters import SearchFilter
+from django.utils.text import slugify
 from django.db.models import Q
 
 # Create your views here.
@@ -44,7 +46,6 @@ def areas_info(request, data=None):
 class Home(View):
     def get(self, request):
         hostels = Hostel.objects.all()
-
         submitted = 'submitted' in request.GET
         data = request.GET if submitted else None
         
@@ -83,9 +84,11 @@ class UserRegisterView(View):
     
         return render(request,"hostelmanagement/Auth/userRegister.html",context)
 
-class SingleHostelView(CreateView):
+class SingleHostelView(DetailView):
     def get(self, request, slug):
         hostel = Hostel.objects.get(slug=slug)
+        hostel.views += 1
+        hostel.save()
         context = {
             "hostel": hostel,
         }
@@ -95,19 +98,24 @@ class SingleHostelView(CreateView):
 
 class Dashboard(View):
     def get(self,request):
+        facilities = Facilities.objects.all()
+        rooms = Room.objects.filter(usr=request.user)
 
         data = Hostel.objects.filter(usr=request.user)
-        x = list(data)
-        k = {}
-        m = []
-        for p in x:
-            o = len(list(Room.objects.filter(room_number = p.room.room_number)))
-            k["rooms"] = o
-            k["hostel"] = p.name
-            m.append(k)
-        print(m)
+        dataList = list(data)
+        obj_sample = {}
+        list_sample = []
+        # for value in dataList:
+        #     res = len(list(Room.objects.filter(room_number = value.room.room_number)))
+        #     obj_sample["rooms"] = res
+        #     obj_sample["hostel"] = value.name
+        #     list_sample.append(obj_sample)
+
         context = {
-            "data":m
+            "data":data,
+            "C_hostel":data,
+            "C_rooms":rooms,
+            "C_facilities":facilities
         }
         return render(request,"hostelmanagement/dashboard/ownerDashboard.html",context)
 
@@ -131,35 +139,54 @@ def manageHostels(request):
     return render(request,"hostelmanagement/dashboard/manageHostels.html",context)
 
 def addHostel(request):
+    hostelDetails = HostelDetail.objects.filter(usr=request.user)
+    allfacilities = Facilities.objects.all()
+    rooms = Room.objects.filter(usr=request.user)
+    resFacility = []
+    resRoom = []
+
     if request.method == "POST":
-        form = HostelForm(request.POST,request.FILES)
+        form = HostelForm(request.POST, request.FILES) 
+        Value1 = request.POST.get("details")
+        facilitylist = request.POST.getlist("facilities")
+        roomlist = request.POST.get("room")
+        details = HostelDetail.objects.get(near_by=Value1)
 
         if form.is_valid():
-            
             usr=request.user
             name = form.cleaned_data["name"]
             location = form.cleaned_data["location"]
             type_of_hostel = form.cleaned_data["type_of_hostel"]
-            description = form.cleaned_data["description"]
-            details = form.cleaned_data["details"]
-            images = form.cleaned_data["images"]
-            facilities = form.cleaned_data["facilities"]
-            room = form.cleaned_data["room"]
+            description = form.cleaned_data["description"]     
+            images = form.cleaned_data["hostelimage"]
+            food_facility = form.cleaned_data["food_facility"]
             zipcode = form.cleaned_data["zipcode"]
-            slug = name.lower()
-
-            hostel = Hostel(usr=usr,name=name,slug=slug,location=location,zipcode=zipcode,type_of_hostel=type_of_hostel,description=description,images=images,room=room)
+            slug = slugify(name)
+            hostel = Hostel(usr=usr,name=name,details=details,slug=slug,location=location,zipcode=zipcode,type_of_hostel=type_of_hostel,description=description,images=images,food_facility=food_facility)
             messages.success(request,"Hostel has been added")
-
             hostel.save()
-            hostel.details.set(details)
-            hostel.facilities.set(facilities)
+
+            for data in facilitylist:
+                val = list(Facilities.objects.filter(facility=data))
+                resFacility.append(val[0])                
+            hostel.facilities.set(resFacility)
+
+            for data in roomlist:
+                val = list(Room.objects.filter(room_number=data))
+                resRoom.append(val[0])
+            hostel.room.set(resRoom)
+
             return HttpResponseRedirect(request.path_info)
+        else:
+            print(form.cleaned_data)
     else:
         form = HostelForm()
 
     context = {
-        "form":form
+        "form":form,
+        "hostelDetails":hostelDetails,
+        "facilities":allfacilities,
+        "rooms":rooms
     }
 
     return render(request,"hostelmanagement/dashboard/Inserts/addHostels.html",context)
@@ -190,16 +217,18 @@ def hostelsDelete(request, pk):
     return HttpResponseRedirect('/dashboard/manage-hostel/')
 
 def rooms(request):
+    hostels = Hostel.objects.filter(usr=request.user)
     
     if 'search-query' in request.GET:
         query = request.GET['search-query']
-        searchData = Q(Q(room_number__icontains=query) | Q(room_cost__icontains=query))
-        data = Room.objects.filter(searchData)
+        print(query)
+        data = Room.objects.filter(hostel_name=query)
     else:
         data = Room.objects.filter(usr=request.user)
 
     context = {
         "rooms":data,
+        "hostels":hostels
     }
 
     return render(request,"hostelmanagement/dashboard/rooms.html",context)
@@ -208,8 +237,7 @@ def addRoom(request):
     if request.method == "POST":     
         form = RoomForm(request.POST, request.FILES)
         
-        if form.is_valid():
-
+        if form.is_valid():    
             usr = request.user
             room_number = form.cleaned_data["room_number"]
             number_of_students = form.cleaned_data["number_of_students"]
@@ -219,14 +247,16 @@ def addRoom(request):
 
             room = Room(usr=usr,room_number=room_number,number_of_students=number_of_students,status=status,room_cost=room_cost,room_imgs=room_imgs)
             messages.success(request,"Profile Has Been Updated.")
-
+            
             room.save()
             return HttpResponseRedirect(request.path_info)
     else:
         form = RoomForm()
 
+    hostels = Hostel.objects.filter(usr=request.user)
     context = {
         "form":form,
+        "hostels":hostels,
     }
 
     return render(request,"hostelmanagement/dashboard/Inserts/roomsInsert.html",context)

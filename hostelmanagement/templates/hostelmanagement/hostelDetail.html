@@ -2,9 +2,71 @@
 {% load static %}
 
 {% block title %} {{hostel.name}} {% endblock  %}
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'hostelmanagement/assets/css/home.css' %}" />
+{% endblock  %}
 
 {% block content %}
-    <section>
-        <h2>{{ hostel.rent }}</h2>
+    <section class="section-1">
+        <div class="div-img">
+            <img src="{{hostel.images.url}}" alt="">
+        </div>
+        <div class="div-abs">
+            <div class="div-content">
+                <h2>{{hostel.name}}</h2>
+                <p>{{hostel.location}}</p>
+                {% for room in hostel.room.all %}
+                    <h4>Rent : {{room.room_cost}}</h4>
+                {% endfor %}
+            </div>
+            <div class="div-content-2">
+                <div class="hostel-type">
+                    <div class="icn-set">
+                        <i class="fa fa-male" aria-hidden="true"></i>
+                    </div>
+                    <h6>{{hostel.type_of_hostel}}</h6>
+                </div>
+                <div class="div-view">
+                    <span class="material-symbols-outlined">
+                        visibility
+                        </span>
+                    <h6>Viewed - {{hostel.views}}</h6>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-2">
+        <main class="main-sec">
+            <div class="div-details">
+                <h5>Details</h5>
+            <div class="tble-responsive">
+                <table class="table table-hover">
+                    <tr>
+                        <td>Notice Period</td>
+                        <td>15 days</td>
+                    </tr>
+                    <tr>
+                        <td>Near By</td>
+                        <td>Bus Stand</td>
+                    </tr>
+                    <tr>
+                        <td>Visitors Allowed</td>
+                        <td>X</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="div-faci">
+            <h5>Facilities</h5>
+            <ul>
+                {% for facility in hostel.facilities.all %}
+                    <li>{{facility.facility}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </main>
+        <div class="div-contact">
+            LOCA
+        </div>
     </section>
 {% endblock  %}

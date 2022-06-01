@@ -187,10 +187,13 @@ main {
     border-radius: 15px;
 }
 
+.header .search-div select,
 .header .search-div input {
     background: transparent;
     border: none;
     outline: none;
+    /* SELECT TAG */
+    -webkit-appearance: none;
 }
 
 .header .search-div button {
@@ -410,6 +413,16 @@ input[type="file"] {
     margin: 1rem 3rem;
     overflow: hidden;
     padding: 5px 0px;
+    background: transparent;
+}
+
+.input-wrapper-2 {
+    width: 75%;
+    position: relative;
+    height: max-content;
+    margin: 1rem 3rem;
+    overflow: hidden;
+    padding: 10px 10px;
     background: #ddd;
 }
 
@@ -424,6 +437,13 @@ input[type="file"] {
     letter-spacing: 2px;
 }
 
+.input-wrapper-2 select {
+    margin: 0 1rem;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
 .input-wrapper label {
     position: absolute;
     bottom: 0px;
@@ -431,7 +451,11 @@ input[type="file"] {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    border-bottom: 1px solid whitesmoke;
+    border-bottom: 1px solid #202028;
+}
+
+.input-wrapper .label-2 {
+    position: relative;
 }
 
 .input-wrapper label::after {
@@ -451,7 +475,7 @@ input[type="file"] {
     bottom: 5px;
     left: 4px;
     transition: all 0.3s ease;
-    color: whitesmoke;
+    color: #202028;
 }
 
 .input-wrapper input:focus+.label-name .content-name,

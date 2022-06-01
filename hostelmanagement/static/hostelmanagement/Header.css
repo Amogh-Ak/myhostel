@@ -10,9 +10,14 @@
 .header-left {
     width: max-content;
     height: max-content;
-    letter-spacing: 3px;
+    letter-spacing: 0px;
     margin: auto 0.5rem;
     color: ivory;
+}
+
+.header-left a {
+    text-decoration: none;
+    color: whitesmoke;
 }
 
 .header-left img {

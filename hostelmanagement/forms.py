@@ -8,18 +8,19 @@ from django.contrib.auth import password_validation
 from .models import CustomUser, Facilities, Hostel, HostelDetail, OwnerDetail, Room
 
 class HostelForm(forms.ModelForm):
-    images = forms.ImageField()
+    hostelimage = forms.ImageField()
     class Meta:
         model = Hostel
-        fields= ["name","location","zipcode","type_of_hostel","description","details","facilities","images","room","food_facility"]
-        exclude = ["slug","usr","views"]
+        fields= ["name","location","zipcode","type_of_hostel","description","hostelimage","food_facility"]
+        exclude = ["slug","usr","views","status","details","facilities","room"]
+        widgets = {'type_of_hostel':forms.Select(),'food_facility':forms.Select()}
 
 class RoomForm(forms.ModelForm):
     room_imgs = forms.ImageField()
     class Meta:
         model = Room
         fields= ["room_number","number_of_students","status","room_cost","room_imgs"]
-        exclude = ["usr"]
+        exclude = ["usr","hostel_name"]
 
     def clean_room_number(self):
         room_number = self.cleaned_data["room_number"]
@@ -57,6 +58,7 @@ class FacilityForm(forms.ModelForm):
         fields = "__all__"
 
 class OwnerForm(forms.ModelForm):
+    profilePic = forms.ImageField()
     class Meta:
         model = OwnerDetail
         fields = "__all__"
@@ -71,7 +73,7 @@ class UserRegisterForm(UserCreationForm):
     email = forms.CharField(required=True,widget=forms.EmailInput(attrs={'class':'form-control'}))
     class Meta(UserCreationForm):
         model = CustomUser
-        fields = ['username','email','password1','password2','is_Owner']
+        fields = ['username','email','password1','password2','is_Owner','is_Student']
         labels = {'email':'Email'}
         widgets = {'username':forms.TextInput(attrs={'class':'form-control'})}
 

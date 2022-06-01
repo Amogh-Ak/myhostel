@@ -31,25 +31,30 @@
       <div class="box-list">
         <li>
           <h5>Total Hostels</h5>
-          <span>21</span>
+          <span>{{C_hostel|length}}</span>
         </li>
         <li>
           <h5>Total Rooms</h5>
-          <span>21</span>
+          <span>{{C_rooms|length}}</span>
         </li>
         <li>
           <h5>Total Facilities</h5>
-          <span>21</span>
+          <span>{{C_facilities|length}}</span>
         </li>
       </div>
     </div>
-    {% if data %}
+    {% if data|length > 2 %}
     <div class="chart-div">
       <canvas id="myChart"></canvas>
     </div>
     {% else %}
-    <p>Welcome {{request.user}} to your dashboard.</p>
+    <p>Welcome {{request.user}} to your dashboard. <br> Thank you for being a member of our platform. 
+    <br> Go ahead enjoy the stay and Here is some guide for you!
+  <br> First get the initail grounds by adding your desired hostel details, the facilities and the rooms 
+  <br> Then fill in the hostel requirements and submit the form
+<br>Then the rest our team will handle on your behalf</p>
     {% endif %}
+
     <script>
       const ctx = document.getElementById('myChart').getContext('2d');
       const myChart = new Chart(ctx, {
