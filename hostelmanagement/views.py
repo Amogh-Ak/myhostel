@@ -1,6 +1,3 @@
-from asyncio.windows_events import NULL
-from multiprocessing import context
-from django import http
 from django.shortcuts import render, redirect
 from django.views import View
 from .forms import FacilityForm, HostelDetailsForm, HostelForm, OwnerForm, RoomForm, UserRegisterForm
