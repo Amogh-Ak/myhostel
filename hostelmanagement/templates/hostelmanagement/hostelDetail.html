@@ -40,18 +40,38 @@
             <div class="div-details">
                 <h5>Details</h5>
             <div class="tble-responsive">
-                <table class="table table-hover">
+                <table class="table table-hover">                    
                     <tr>
                         <td>Notice Period</td>
-                        <td>15 days</td>
+                        <td>{{hostel.details.notice_period}}</td>
                     </tr>
                     <tr>
                         <td>Near By</td>
-                        <td>Bus Stand</td>
+                        <td>{{hostel.details.near_by}}</td>
                     </tr>
                     <tr>
                         <td>Visitors Allowed</td>
-                        <td>X</td>
+                        {% if hostel.details.visitors_allowed %}
+                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                        {% else %}
+                            <td><i class="fa fa-times" aria-hidden="true"></i></td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <td>Security Deposit</td>
+                        <td>{{hostel.details.security_deposit}}</td>
+                    </tr>
+                    <tr>
+                        <td>Warden</td>
+                        {% if hostel.details.warden %}
+                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                        {% else %}
+                            <td><i class="fa fa-times" aria-hidden="true"></i></td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <td>Restrictions</td>
+                        <td>{{hostel.details.restrictions}}</td>
                     </tr>
                 </table>
             </div>
@@ -64,9 +84,100 @@
                 {% endfor %}
             </ul>
         </div>
+        <div class="div-rooms">
+            <h5>Rooms</h5>
+            {% for room in hostel.room.all %}
+            <div class="rooms-block">
+                <div class="upper-block">
+                    <p>₹ {{room.room_cost}}</p>
+                    <p>{{room.number_of_students}} Sharing Rooms</p>
+                    {% if hostel.food_facility == "With Mess" %}
+                        <p>Food Included</p>
+                    {% else %}
+                        <p>Food Not Included</p>
+                    {% endif %}
+                </div>
+                <div class="rooms-lower">
+                    <div class="lower-block">
+                        <img src="{{room.room_imgs.url}}" alt="">
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="div-reviews">
+            <h5>User Reviews</h5>
+            {% if reviews|length > 0 %}
+                {% for review in reviews %}
+                <div class="review-block">
+                    <div class="review-div">
+                        <div class="review-usr-img">
+                            <img src="{{hostel.images.url}}" alt="">
+                        </div>
+                        <div class="review-content">
+                            <h6>{{review.usr}}</h6>
+                            <p>{{review.text}}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No Reviews. Go ahead add a Review</p>
+            {% endif %}
+        </div>
     </main>
-        <div class="div-contact">
-            LOCA
+        <div class="div-contact-location">
+            {% if request.user.is_authenticated %}
+                <div class="div-contact">
+                    <h5>Location</h5>
+                    <div class="div-addr">
+                        Address:
+                        <p>{{hostel.location}}</p>
+                    </div>
+                </div>
+            {% endif %}
+            {% if request.user.is_authenticated %}
+                <div class="div-owner-details">
+                    <h5>Contact Owner</h5>
+                    <div class="div-owner">
+                        <div class="owner-pic">
+                            <img src="{{ownerDetail.profilePic.url}}" alt="">
+                        </div>
+                        <div class="owner-detail">
+                            <h5>Name : {{ownerDetail.name}}</h5>
+                            <p>Address : {{ownerDetail.address}}</p>
+                            <small>Contact : {{ownerDetail.contact_num}}</small>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if request.user.is_authenticated %}
+            <div class="add-review">
+                <h5>Add a Review</h5>
+                <form action="{% url 'hostel_details' hostel.slug %}" method="POST" class="review-block add-rev">
+                    {% csrf_token %}
+                <div class="review-div">
+                    <div class="review-usr-img">
+                        <img src="{{hostel.images.url}}" alt="">
+                    </div>
+                    <div class="review-content">
+                        <h6>Amogh</h6>
+                        <input type="text" name="text" id="text">
+                    </div>
+                </div>
+                <div class="review-send">
+                    <button type="submit">
+                        <span class="material-symbols-outlined">
+                            send
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+            {% endif %}
         </div>
     </section>
 {% endblock  %}

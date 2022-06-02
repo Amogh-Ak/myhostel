@@ -80,10 +80,18 @@ class Hostel(models.Model):
     food_facility = models.CharField(choices=FOOD_STATUS,max_length=50, default="With Food",null=True)
     views = models.IntegerField(default=0)
     description = models.TextField(max_length=1000)
-    details = models.ForeignKey(HostelDetail, on_delete=models.CASCADE)
+    details = models.ForeignKey(HostelDetail, on_delete=models.CASCADE,null=True)
     images = models.ImageField(upload_to='hostelimage')
     facilities = models.ManyToManyField(Facilities)
     status = models.CharField(max_length=50,choices=STATUS_CHOICES,default='Not Approved.')
 
     def __str__(self):
         return f"{ self.name }"
+
+class Reviews(models.Model):
+    usr = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
+    text = models.TextField(max_length=400)
+    hostel = models.ForeignKey(Hostel, on_delete=models.CASCADE,related_name="reviews")
+
+    def __str__(self):
+        return f"{ self.text }"

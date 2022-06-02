@@ -75,7 +75,7 @@ class UserRegisterForm(UserCreationForm):
         model = CustomUser
         fields = ['username','email','password1','password2','is_Owner','is_Student']
         labels = {'email':'Email'}
-        widgets = {'username':forms.TextInput(attrs={'class':'form-control'})}
+        widgets = {'username':forms.TextInput(attrs={'class':'form-control'}),'is_Owner':forms.CheckboxInput(attrs={'class':'form-check-input'}),'is_Student':forms.CheckboxInput(attrs={'class':'form-check-input'})}
 
 class LoginForm(AuthenticationForm):
 

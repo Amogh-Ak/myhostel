@@ -4,7 +4,7 @@ from .forms import FacilityForm, HostelDetailsForm, HostelForm, OwnerForm, RoomF
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from hostelmanagement.models import Hostel, CustomUser, Room, Facilities, HostelDetail, OwnerDetail
+from hostelmanagement.models import Hostel, CustomUser, Room, Facilities, HostelDetail, OwnerDetail, Reviews
 from django.views.generic import DetailView
 from django.http.response import HttpResponseRedirect
 from .filters import SearchFilter
@@ -86,8 +86,32 @@ class SingleHostelView(DetailView):
         hostel = Hostel.objects.get(slug=slug)
         hostel.views += 1
         hostel.save()
+        owner = OwnerDetail.objects.get(usr=hostel.usr)
         context = {
             "hostel": hostel,
+            "ownerDetail":owner,
+            "reviews":hostel.reviews.all()
+        }
+
+        return render(request, "hostelmanagement/hostelDetail.html", context)
+
+    def post(self, request, slug):
+        hostel = Hostel.objects.get(slug=slug)
+        if request.method == "POST":
+            review = Reviews()
+            review.text = request.POST.get("text")
+            review.usr = request.user
+            review.hostel = hostel
+
+            review.save()
+            return HttpResponseRedirect(request.path_info)
+        hostel.views += 1
+        hostel.save()
+        owner = OwnerDetail.objects.get(usr=hostel.usr)
+        context = {
+            "hostel": hostel,
+            "ownerDetail":owner,
+            "reviews":hostel.reviews.all().order_by('-id')
         }
 
         return render(request, "hostelmanagement/hostelDetail.html", context)

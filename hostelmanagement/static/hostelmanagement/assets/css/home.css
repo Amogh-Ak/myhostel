@@ -472,10 +472,68 @@ p {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
-.div-contact {
+.div-contact-location {
     width: 35%;
+}
+
+.div-contact {
     background: whitesmoke;
+    height: max-content;
+    padding: 1rem 0.5rem;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.div-contact h5 {
+    letter-spacing: 1px;
+}
+
+.div-addr {
+    padding: 0.3rem 0.5rem;
+}
+
+.div-addr p {
+    word-wrap: break-word;
+}
+
+.div-owner-details {
+    margin: 2rem auto;
+    padding: 1rem 0.5rem;
+    background: whitesmoke;
+    height: max-content;
+    padding: 1rem 0.5rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.div-owner-details h5 {
+    letter-spacing: 1px;
+}
+
+.div-owner {
+    display: flex;
+}
+
+.owner-pic {
+    width: 110px;
+    height: 100px;
+    margin-left: 1rem;
+}
+
+.owner-detail {
+    margin: 0.2rem 0.8rem;
+}
+
+.owner-detail h5,
+p,
+small {
+    margin: 0.3rem 0;
+    letter-spacing: 1px;
+}
+
+.owner-pic img {
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+    border-radius: 10px;
 }
 
 .div-faci {
@@ -487,11 +545,149 @@ p {
 }
 
 .div-faci ul {
-    display: flex;
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    grid-template-rows: min-content min-content min-content;
+    width: 100%;
+    height: max-content;
+    gap: 1rem;
 }
 
-.div-faci ul li {
-    flex: 1;
+.div-rooms {
+    background: whitesmoke;
+    margin: 3rem 0;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    border-radius: 5px;
+    padding: 1rem 1.5rem;
+}
+
+.rooms-block {
+    padding: 0.5rem 1rem;
+    padding-bottom: 2rem;
+}
+
+.upper-block {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+}
+
+.upper-block p {
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    margin: 0.5rem 1rem;
+}
+
+.rooms-lower {
+    padding-top: 1rem;
+}
+
+.lower-block {
+    width: 190px;
+    height: 100px;
+}
+
+.lower-block img {
+    width: 100%;
+    height: 100%;
+}
+
+.div-reviews {
+    border-radius: 5px;
+    background: whitesmoke;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    padding: 0.5rem 0.3rem;
+}
+
+.div-reviews h5 {
+    letter-spacing: 1px;
+    margin-left: 0.5rem;
+}
+
+.review-block {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 0.6rem;
+    border-bottom: 1px solid black;
+    margin: 2rem 0;
+}
+
+.review-block i {
+    font-size: 1.2rem;
+}
+
+.review-div {
+    display: flex;
+    padding: 0.5rem 1rem;
+}
+
+.review-usr-img {
+    width: 60px;
+    height: 60px;
+}
+
+.review-usr-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.review-content {
+    margin: 0rem 0.8rem;
+}
+
+.review-content h6 {
+    padding-top: 0.4rem;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.review-content p {
+    margin: 0;
+    margin-left: 0.8rem;
+    word-wrap: break-word;
+}
+
+.add-review {
+    border-radius: 5px;
+    background: whitesmoke;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    padding-top: 0.4rem;
+}
+
+.add-review h5 {
+    margin-left: 0.5rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.add-rev {
+    margin: 0;
+    border-bottom: none;
+}
+
+.review-content input {
+    background: transparent;
+    outline: none;
+    margin: 0.5rem auto;
+    border: none;
+    width: 100%;
+    border-bottom: 1px solid #2b2b28;
+}
+
+.review-send {
+    margin: auto 0;
+}
+
+.review-send button {
+    background: transparent;
+    border: none;
+}
+
+.review-send span {
+    font-size: 2rem;
 }
 
 /* END HOSTEL DETAIL PAGE */
