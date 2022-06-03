@@ -9,7 +9,9 @@
         <i class="fas fa-map-marker-alt"></i>
         <p>{{hostel.location}}</p>
       </div>
-      <h4>{{hostel.rent}}</h4>
+        {% for room in hostel.room.all %}
+          <h4>Rent : {{room.room_cost}}</h4>
+        {% endfor %}
       <div class="facilities">
         <h3>Facilities :</h3>
         <div class="fac-list">

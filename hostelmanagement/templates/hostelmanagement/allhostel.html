@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'hostelmanagement/assets/css/home.css' %}" />
+{% endblock %} 
+
+{% block content %}
+    <h3 class="area-h3">List of all the Hostels</h3>
+    <div class="pop-list">
+
+        {% for hostel in hostels  %}
+        {% include "hostelmanagement/includes/hostelCard.html" %}
+        {% endfor %}
+    </div>
+{% endblock  %}

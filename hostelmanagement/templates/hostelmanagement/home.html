@@ -55,6 +55,9 @@
     {% endif %}
     <section class="explore-section">
         {% include "hostelmanagement/includes/areaListings.html" %}
+        <div class="all-locs">
+          <a href="{% url 'explore' %}"><button>View All Locations</button><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+        </div>
     </section>
 
     <section class="popular-section">
@@ -66,7 +69,11 @@
         {% endfor %}
       </div>
       
-      <div class="all-locs"><button>Check out All Hostels</button><i class="fa fa-chevron-right" aria-hidden="true"></i>
+      <div class="all-locs">
+        <a href="{% url 'allhostels' %}">
+          <button>Check out All Hostels</button><i class="fa fa-chevron-right" aria-hidden="true"></i>
+        </a>
+      </div>
     </section>
 
 {% endblock  %}

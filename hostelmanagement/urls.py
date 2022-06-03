@@ -8,11 +8,17 @@ urlpatterns = [
     path("hostel/<slug:slug>",views.SingleHostelView.as_view(),name="hostel_details"),
     path("areas/<slug:data>",views.areas_info,name="areadata"),
     path("search/",views.searchRes,name="search"),
+    path("explore/",views.explore,name="explore"),
+    path("allhostel/",views.allhostels,name="allhostels"),
+
+    #----------------Authuntication-------------
 
     path("register/",views.UserRegisterView.as_view(),name="userRegister"),
     path("accounts/login/",auth_views.LoginView.as_view(template_name="hostelmanagement/Auth/login.html",authentication_form=LoginForm),name='login'),
     path("logout/", auth_views.LogoutView.as_view(next_page='login'),name="logout"),
     path('login_success/', views.login_success, name='login_success'),
+
+    #----------------End Authuntication----------
 
     # -----------------DASHBOARD------------------
 

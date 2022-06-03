@@ -8,7 +8,7 @@
 {% block content %}
 <header class="header-section">
   <div class="header-left">
-    <a href={% url 'home' %}>ℳ𝓎ℋ𝑜𝓈𝓉𝑒𝓁.𝒸𝑜𝓂</a>
+    <a href={% url 'home' %}>MyHostel.com</a>
   </div>
   <div class="header-right">
     {% if request.user.is_authenticated %}
@@ -17,7 +17,7 @@
       null
       {% else %}
       <div class="header-long">
-        <li><a href="#">Explore</a></li> 
+        <li><a href="{% url 'explore' %}">Explore</a></li> 
         <li class="nav-item mx-2">
           <a href="{% url 'logout' %}">Logout</a>
         </li>

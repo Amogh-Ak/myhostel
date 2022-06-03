@@ -3,7 +3,6 @@ from django.views import View
 from .forms import FacilityForm, HostelDetailsForm, HostelForm, OwnerForm, RoomForm, UserRegisterForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
 from hostelmanagement.models import Hostel, CustomUser, Room, Facilities, HostelDetail, OwnerDetail, Reviews
 from django.views.generic import DetailView
 from django.http.response import HttpResponseRedirect
@@ -36,9 +35,19 @@ def areas_info(request, data=None):
     
     context = {
         "hostels":hostels,
+        "area":data,
     }
 
     return render(request,"hostelmanagement/areaHostels.html",context)
+
+@login_required
+def explore(request):
+    return render(request,"hostelmanagement/explore.html")
+
+@login_required
+def allhostels(request):
+    hostels = Hostel.objects.all()
+    return render(request,"hostelmanagement/allhostel.html",{"hostels":hostels})
 
 class Home(View):
     def get(self, request):
@@ -153,9 +162,11 @@ def manageHostels(request):
     for p in x:        
         if 'Approved' in p.status:
             results.append(p)   
+    owner = OwnerDetail.objects.get(usr=request.user)
 
     context ={
-        "hostels":results
+        "hostels":results,
+        "owner":owner
     }
     return render(request,"hostelmanagement/dashboard/manageHostels.html",context)
 

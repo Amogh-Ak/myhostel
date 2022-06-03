@@ -331,3 +331,26 @@
 }
 
 /*END HOME PAGE */
+
+/* HOSTEL DETAIL PAGE */
+@media screen and (max-width: 400px) {
+    .section-2 {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .div-faci {
+        display: none;
+    }
+
+    .div-abs {
+        padding: 0rem 1rem;
+    }
+
+    .div-details {
+        width: 100%;
+    }
+
+}
+
+/* END HSOTEL DETAIL PAGE */
