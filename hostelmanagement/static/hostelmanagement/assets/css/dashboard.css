@@ -60,9 +60,23 @@ main {
     display: flex;
 }
 
-.nav-list ul li a span {
+.nav-list ul li button {
+    background: transparent;
+    display: flex;
+    border: none;
+    outline: none;
+}
+
+.nav-list ul li a span,
+.nav-list ul li button span {
     color: whitesmoke;
     margin-right: 10px;
+}
+
+.nav-list ul li button h6 {
+    font-size: 15px;
+    color: whitesmoke;
+    letter-spacing: 2px;
 }
 
 .nav-list ul li a h6 {
@@ -70,6 +84,11 @@ main {
     font-size: 12px;
     padding-top: 5px;
     width: 100%;
+}
+
+.logout-a {
+    text-decoration: none;
+    color: whitesmoke;
 }
 
 .dashboard-section {

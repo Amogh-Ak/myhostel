@@ -3,7 +3,7 @@
 {% block content %}
 <section class="side-nav">
     <div class="img-div">
-        <img src={% static 'hostelmanagement/assets/images/hostelBG.jpg'%} alt="">
+        <img src={% static 'hostelmanagement/assets/images/hostelLogo.jpg'%} alt="">
     </div>
     <div class="nav-list">
         <ul>
@@ -56,13 +56,35 @@
                 </a>
             </li>
             <li>
-                <a href="{% url 'logout' %}">
+                <button type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <span class="material-symbols-outlined">
                         logout
                     </span>
                     <h6>Logout</h6>
-                </a>
+                </button>
             </li>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">LogOut</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to logout?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">
+              <a href="{% url 'logout' %}" class="logout-a">Confirm</a>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
         </ul>
     </div>
 </section>

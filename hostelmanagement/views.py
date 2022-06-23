@@ -181,7 +181,7 @@ def addHostel(request):
         form = HostelForm(request.POST, request.FILES) 
         Value1 = request.POST.get("details")
         facilitylist = request.POST.getlist("facilities")
-        roomlist = request.POST.get("room")
+        roomlist = request.POST.getlist("room")
         details = HostelDetail.objects.get(near_by=Value1)
 
         if form.is_valid():
@@ -202,7 +202,7 @@ def addHostel(request):
                 val = list(Facilities.objects.filter(facility=data))
                 resFacility.append(val[0])                
             hostel.facilities.set(resFacility)
-
+            
             for data in roomlist:
                 val = list(Room.objects.filter(room_number=data))
                 resRoom.append(val[0])

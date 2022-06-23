@@ -14,7 +14,12 @@
     {% if request.user.is_authenticated %}
     <ul>
       {% if request.user.is_Owner %}
-      null
+      <div class="header-long">
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li class="nav-item mx-2">
+          <a href="{% url 'logout' %}">Logout</a>
+        </li>
+      </div>
       {% else %}
       <div class="header-long">
         <li><a href="{% url 'explore' %}">Explore</a></li> 
