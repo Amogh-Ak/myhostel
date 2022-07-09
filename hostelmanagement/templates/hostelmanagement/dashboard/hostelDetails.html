@@ -28,8 +28,8 @@
     <div class="owner-section">
       <div class="owner-block">
         <div class="owner-img-div">
-          <img src={% static 'hostelmanagement/assets/images/hostelBG.jpg'%}
-          alt="">
+          <img src="{{owner.profilePic.url}}"
+          alt="{{request.user}}">
         </div>
         <a href="#">{{request.user}}</a>
       </div>
@@ -67,7 +67,11 @@
         <tr>
           <td>{{hostel.notice_period}}</td>
           <td>{{hostel.near_by}}</td>
-          <td>{{hostel.visitors_allowed}}</td>
+          {% if hostel.visitors_allowed == True %}
+            <td>Yes</td>
+          {% else %}
+            <td>No</td>
+          {% endif %}
           <td>{{hostel.security_deposit}}</td>
           <td>{{hostel.restrictions}}</td>
           <td>
