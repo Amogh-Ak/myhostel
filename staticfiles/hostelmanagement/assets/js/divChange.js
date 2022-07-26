@@ -1,12 +1,7 @@
 const form = document.getElementById('form');
 const faci = document.getElementById('facility');
-
-form.addEventListener('submit', e => {
-
-    validateInputs();
-});
-
 const setError = (element, message) => {
+    
     const inputControl = element.parentElement;
     const errorDisplay = inputControl.querySelector('.error');
 

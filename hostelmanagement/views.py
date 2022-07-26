@@ -12,6 +12,12 @@ from django.db.models import Q
 
 # Create your views here.
 
+def error_404_view(request, exception):
+    return render(request,'404.html')
+
+def error_500_view(request):
+    return render(request,'500.html')
+
 def login_success(request):
     """
     Redirects users based on whether they are in the admins group
