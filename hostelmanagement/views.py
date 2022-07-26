@@ -13,7 +13,7 @@ from django.db.models import Q
 # Create your views here.
 
 def error_404_view(request, exception):
-    return render(request,'404.html')
+    return render(request,'500.html')
 
 def error_500_view(request):
     return render(request,'500.html')

@@ -39,6 +39,16 @@
     margin-bottom: 24px;
 }
 
+.error-subtitle a {
+    text-decoration: none;
+    font-size: 20px;
+    letter-spacing: 1px;
+    background: #ddd;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    color: #4b4b62;
+}
+
 svg {
     margin-bottom: 16px;
 }
