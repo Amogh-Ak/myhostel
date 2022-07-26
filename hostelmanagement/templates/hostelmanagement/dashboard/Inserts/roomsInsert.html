@@ -50,7 +50,7 @@
     <form method="POST" enctype="multipart/form-data" class="form-block" id="room-form">
         {% if messages %}
             {% for message in messages %}
-                <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5"{% endif %}>{{message}}</p>
+                <p {% if message.tags %} class="alert alert-{{message.tags}} mb-3 mt-3"{% endif %}>{{message}}</p>
             {% endfor %}
         {% endif %}
         {% csrf_token %}
@@ -96,6 +96,7 @@
                 <div class="input-wrapper-2">
                     <label for="status">Status:</label>
                     <select name="status" id="status">
+                        <option value="">---</option>
                         <option value="Available">Available</option>
                         <option value="Not Available">Not Available</option>
                         <option value="Full">Full</option>

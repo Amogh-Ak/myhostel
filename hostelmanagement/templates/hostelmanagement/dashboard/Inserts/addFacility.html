@@ -30,7 +30,7 @@
             <div class="owner-section">
                 <div class="owner-block">
                     <div class="owner-img-div">
-                        <img src={% static 'hostelmanagement/assets/images/hostelBG.jpg'%} alt="">
+                        <img src="{{owner.profilePic.url}}" alt="">
                     </div>
                     <a href="#">{{request.user}}</a>
                 </div>
@@ -49,14 +49,23 @@
                     <button type="submit"><i class="fa fa-search-plus" aria-hidden="true"></i></button>
                 </form>
             </div>
-                <form method="POST" id="form">
+                <form method="POST" id="form" >
+                    {% if messages %}
+
+                        {% for message in messages %}
+                            <p {% if message.tags %} class="alert alert-{{message.tags}} mb-3 mt-3"{% endif %}>{{message}}</p>
+                        {% endfor %}
+
+                    {% endif %}
                     {% csrf_token %}
-                    <div class="input-control">
-                        <label for="facility">Name:</label>
-                        <input id="facility" name="facility" type="text">
-                        <div class="error"></div>
+                    <div class="fac-form">
+                        <div class="input-control">
+                            <label for="facility">Name:</label>
+                            <input id="facility" name="facility" type="text">
+                            <div class="error"></div>
+                        </div>
+                        <button type="submit">Add</button>
                     </div>
-                    <button type="submit">Add</button>
                 </form>
         </section>
     </main>

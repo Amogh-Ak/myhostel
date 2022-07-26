@@ -213,12 +213,13 @@ def addHostel(request):
             print(form.cleaned_data)
     else:
         form = HostelForm()
-
+    owner = OwnerDetail.objects.get(usr=request.user)
     context = {
         "form":form,
         "hostelDetails":hostelDetails,
         "facilities":allfacilities,
-        "rooms":rooms
+        "rooms":rooms,
+        "owner":owner
     }
 
     return render(request,"hostelmanagement/dashboard/Inserts/addHostels.html",context)
@@ -258,9 +259,11 @@ def rooms(request):
     else:
         data = Room.objects.filter(usr=request.user)
 
+    owner = OwnerDetail.objects.get(usr=request.user)
     context = {
         "rooms":data,
-        "hostels":hostels
+        "hostels":hostels,
+        "owner":owner
     }
 
     return render(request,"hostelmanagement/dashboard/rooms.html",context)
@@ -278,7 +281,7 @@ def addRoom(request):
             room_imgs = form.cleaned_data["room_imgs"]
 
             room = Room(usr=usr,room_number=room_number,number_of_students=number_of_students,status=status,room_cost=room_cost,room_imgs=room_imgs)
-            messages.success(request,"Profile Has Been Updated.")
+            messages.success(request,"Room has been added.")
             
             room.save()
             return HttpResponseRedirect(request.path_info)
@@ -286,9 +289,11 @@ def addRoom(request):
         form = RoomForm()
 
     hostels = Hostel.objects.filter(usr=request.user)
+    owner = OwnerDetail.objects.get(usr=request.user)
     context = {
         "form":form,
         "hostels":hostels,
+        "owner":owner
     }
 
     return render(request,"hostelmanagement/dashboard/Inserts/roomsInsert.html",context)
@@ -326,9 +331,11 @@ def hostelDetails(request):
         data = HostelDetail.objects.filter(searchData)
     else:
         data = HostelDetail.objects.filter(usr=request.user)
+    owner = OwnerDetail.objects.get(usr=request.user)
 
     context = {
         "hostelDetails":data,
+        "owner":owner,
     }
 
     return render(request,"hostelmanagement/dashboard/hostelDetails.html",context)
@@ -354,9 +361,10 @@ def addDetails(request):
             return HttpResponseRedirect(request.path_info)
     else:
         form = HostelDetailsForm()
-
+    owner = OwnerDetail.objects.get(usr=request.user)
     context = {
-        "form":form
+        "form":form,
+        "owner":owner
     }
 
     return render(request,"hostelmanagement/dashboard/Inserts/addDetails.html",context)
@@ -392,9 +400,11 @@ def facilities(request):
         data = Facilities.objects.filter(facility__icontains = query)
     else:
         data = Facilities.objects.all()
+    owner = OwnerDetail.objects.get(usr=request.user)
 
     context = {
         "facilities": data,
+        "owner":owner
     }
 
     return render(request,"hostelmanagement/dashboard/facilities.html",context)
@@ -407,8 +417,8 @@ def addFacility(request):
         value.save()
         messages.success(request,"Facility Has Been Added.")
         return HttpResponseRedirect(request.path_info)
-
-    return render(request,"hostelmanagement/dashboard/Inserts/addFacility.html")
+    owner = OwnerDetail.objects.get(usr=request.user)
+    return render(request,"hostelmanagement/dashboard/Inserts/addFacility.html",{"owner":owner})
     
 def facilitiesUpdate(request, pk):
     room = Facilities.objects.get(id=pk)

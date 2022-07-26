@@ -31,7 +31,7 @@
             <div class="owner-section">
                 <div class="owner-block">
                     <div class="owner-img-div">
-                        <img src={% static 'hostelmanagement/assets/images/hostelBG.jpg'%} alt="">
+                        <img src="{{owner.profilePic.url}}" alt="">
                     </div>
                     <a href="#">{{request.user}}</a>
                 </div>
