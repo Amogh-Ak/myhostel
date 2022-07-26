@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'hostelmanagement',
     'widget_tweaks',
+    'cloudinary_storage',
     'django_filters'
 ]
 
@@ -141,3 +142,10 @@ MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "/media/"
 
 AUTH_USER_MODEL = 'hostelmanagement.CustomUser'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME':'mycloudupload', 
+    'API_KEY':'861962655855126',
+    'API_SECRET':'f33FUxZdnMxIH_FgQLR7qIc-pVs'
+}

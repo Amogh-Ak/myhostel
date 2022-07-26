@@ -1,46 +1,37 @@
-// function switchVisible() {
-//   if (document.getElementById("Div1")) {
-//     if (document.getElementById("Div1").style.display == "none") {
-//       document.getElementById("Div1").style.display = "block";
-//       document.getElementById("Div2").style.display = "none";
-//     } else {
-//       document.getElementById("Div1").style.display = "none";
-//       document.getElementById("Div2").style.display = "block";
-//     }
-//   }
-// }
+const form = document.getElementById('form');
+const faci = document.getElementById('facility');
 
-// $('#room-form').submit(function(e){
-//   e.preventDefault()
-//   console.log("PPP")
-// })
+form.addEventListener('submit', e => {
 
-// $('#room-form').on('submit', function(e){
-            
-//   e.preventDefault();
- 
-//     $.ajax({
-//          type : "POST",
-//          url: " ",
-//          data: {
-//           room_number : $('#roomNo').val(),          
-//           csrfmiddlewaretoken: '{{ csrf_token }}',
-//           dataType: "json",
- 
-//          },
-         
-//          success: function(data){
-//             $('#output').html(data.msg) /* response message */
-//          },
- 
-//          failure: function() {
-             
-//          }
- 
- 
-//      });
- 
- 
-//           });   
+    validateInputs();
+});
+
+const setError = (element, message) => {
+    const inputControl = element.parentElement;
+    const errorDisplay = inputControl.querySelector('.error');
+
+    errorDisplay.innerText = message;
+    inputControl.classList.add('error');
+    inputControl.classList.remove('success')
+}
+
+const setSuccess = element => {
+    const inputControl = element.parentElement;
+    const errorDisplay = inputControl.querySelector('.error');
+
+    errorDisplay.innerText = '';
+    inputControl.classList.add('success');
+    inputControl.classList.remove('error');
+};
+
+const validateInputs = () => {
+    const usernameValue = faci.value.trim();
 
 
+    if(usernameValue === '') {
+        setError(faci, 'Facility is required');
+    } else {
+        setSuccess(faci);
+    }
+
+};
