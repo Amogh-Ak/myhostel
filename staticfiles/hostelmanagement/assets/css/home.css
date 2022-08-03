@@ -27,6 +27,18 @@
     height: 400px;
 }
 
+.logout-modal-btn {
+    background-color: #42378f;
+    background-image: linear-gradient(315deg, #42378f 0%, #f53844 74%);
+    margin: 1rem auto;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    color: whitesmoke;
+}
+
 .home-section h1 {
     letter-spacing: 3px;
     color: #E4E4E4;
