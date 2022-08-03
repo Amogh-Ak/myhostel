@@ -13,10 +13,11 @@ main {
     padding: 1rem 2rem;
     padding-bottom: 0;
     width: max-content;
-    height: 610px;
+    height: 100%;
     background: #ddd;
     border-bottom-right-radius: 20px;
     border-top-right-radius: 20px;
+    margin-top: 1rem;
 }
 
 .img-div {
@@ -65,6 +66,18 @@ main {
     display: flex;
     border: none;
     outline: none;
+}
+
+.logout-modal-btn {
+    background-color: #42378f;
+    background-image: linear-gradient(315deg, #42378f 0%, #f53844 74%);
+    margin: 1rem 0.5rem;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    color: whitesmoke;
 }
 
 .nav-list ul li a span,
@@ -380,7 +393,7 @@ table th:last-child {
 }
 
 .img-display-div {
-    width: 90px;
+    width: 120px;
     height: 90px;
     margin: 0 5px;
     border-radius: 10px;

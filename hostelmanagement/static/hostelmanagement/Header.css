@@ -1,6 +1,7 @@
 .header-section {
     display: flex;
-    background: #2b2b35;
+    background: rgb(66, 55, 143);
+    background: linear-gradient(60deg, rgba(66, 55, 143, 1) 9%, rgba(245, 56, 68, 1) 94%);
     justify-content: space-between;
     height: max-content;
     padding: 5px 10px;

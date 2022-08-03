@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'hostelmanagement/assets/css/home.css' %}" />
+{% endblock %} 
+
 {% block content%}
     <div class="container">
         <div class="row my-3">
@@ -27,7 +31,7 @@
                         </div>
 
                     {% endfor %}
-                    <input type="submit" value="Submit" class="btn btn-dark">
+                    <input type="submit" value="Submit" class="logout-modal-btn">
                     <br>
 
                     <div class="text-center text-primary fw-bold ">
