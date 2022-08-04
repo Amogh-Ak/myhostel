@@ -16,36 +16,72 @@
                 </a>
             </li>
             <li>
+                {% if owner %}
                 <a href={% url 'manage-hostels' %}>
                     <span class="material-symbols-outlined">
                         location_city
                     </span>
-                    <h6>Manage Hostels</h6>
+                    <h6>Manage Hostel</h6>
                 </a>
+                {% else %}
+                <button type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                    <span class="material-symbols-outlined">
+                        location_city
+                    </span>
+                    <h6>Manage Hostel</h6>
+                </button>
+                {% endif %}
             </li>
             <li>
+                {% if owner %}
                 <a href="{% url 'hostel-details' %}">
                     <span class="material-symbols-outlined">
                         details
                     </span>
                     <h6>Hostel Details</h6>
                 </a>
+                {% else %}
+                <button type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                    <span class="material-symbols-outlined">
+                        details
+                    </span>
+                    <h6>Hostel Details</h6>
+                </button>
+                {% endif %}
             </li>
             <li>
+                {% if owner %}
                 <a href={% url 'rooms' %}>
                     <span class="material-symbols-outlined">
                         meeting_room
                     </span>
                     <h6>Rooms</h6>
                 </a>
+                {% else %}
+                <button type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                    <span class="material-symbols-outlined">
+                        meeting_room
+                    </span>
+                    <h6>Rooms</h6>
+                </button>
+                {% endif %}
             </li>
             <li>
+                {% if owner %}
                 <a href="{% url 'facilities' %}">
                     <span class="material-symbols-outlined">
                         featured_play_list
                     </span>
                     <h6>Facilities</h6>
                 </a>
+                {% else %}
+                <button type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                    <span class="material-symbols-outlined">
+                        featured_play_list
+                    </span>
+                    <h6>Facilities</h6>
+                </button>
+                {% endif %}
             </li>
             <li>
                 <a href="{% url 'profile' %}">
@@ -81,6 +117,23 @@
           <button type="button" class="logout-modal-btn">
               <a href="{% url 'logout' %}" class="logout-a">Confirm</a>
           </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Notice</h5>
+        </div>
+        <div class="modal-body">
+          Please Update the Profile Before Accessing these tabs.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="logout-modal-btn" data-bs-dismiss="modal">Close</button>
+          
         </div>
       </div>
     </div>

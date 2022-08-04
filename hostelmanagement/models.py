@@ -58,7 +58,7 @@ class OwnerDetail(models.Model):
     name = models.CharField(max_length=150)
     profilePic = models.ImageField(upload_to='ownerimage')
     address = models.CharField(max_length=200)
-    contact_num = PhoneNumberField(null=False, blank=False, unique=True)
+    contact_num = PhoneNumberField(null=False, blank=False)
 
     def __str__(self):
         return f"{ self.usr }"

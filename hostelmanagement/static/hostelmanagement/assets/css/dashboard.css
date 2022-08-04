@@ -66,6 +66,22 @@ main {
     display: flex;
     border: none;
     outline: none;
+    letter-spacing: 2px;
+}
+
+.nav-list ul li a span,
+.nav-list ul li button span {
+    color: whitesmoke;
+    margin-right: 10px;
+}
+
+
+.nav-list ul li a h6,
+.nav-list ul li button h6 {
+    color: whitesmoke;
+    font-size: 12px;
+    padding-top: 5px;
+    width: max-content;
 }
 
 .logout-modal-btn {
@@ -78,25 +94,6 @@ main {
     border: none;
     outline: none;
     color: whitesmoke;
-}
-
-.nav-list ul li a span,
-.nav-list ul li button span {
-    color: whitesmoke;
-    margin-right: 10px;
-}
-
-.nav-list ul li button h6 {
-    font-size: 15px;
-    color: whitesmoke;
-    letter-spacing: 2px;
-}
-
-.nav-list ul li a h6 {
-    color: whitesmoke;
-    font-size: 12px;
-    padding-top: 5px;
-    width: 100%;
 }
 
 .logout-a {

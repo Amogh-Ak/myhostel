@@ -136,7 +136,11 @@ class Dashboard(View):
     def get(self,request):
         facilities = Facilities.objects.all()
         rooms = Room.objects.filter(usr=request.user)
-
+        
+        try:
+            owner = OwnerDetail.objects.get(usr=request.user)
+        except OwnerDetail.DoesNotExist:
+            owner = None
         data = Hostel.objects.filter(usr=request.user)
         dataList = list(data)
         obj_sample = {}
@@ -148,6 +152,7 @@ class Dashboard(View):
         #     list_sample.append(obj_sample)
 
         context = {
+            "owner":owner,
             "data":data,
             "C_hostel":data,
             "C_rooms":rooms,
@@ -169,7 +174,7 @@ def manageHostels(request):
         if 'Approved' in p.status:
             results.append(p)   
     owner = OwnerDetail.objects.get(usr=request.user)
-
+    print(owner)
     context ={
         "hostels":results,
         "owner":owner
