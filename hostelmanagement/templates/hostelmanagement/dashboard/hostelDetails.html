@@ -27,10 +27,16 @@
   <section class="dashboard-section">
     <div class="owner-section">
       <div class="owner-block">
+        {% if owner.profilePic.url %}
         <div class="owner-img-div">
-          <img src="{{owner.profilePic.url}}"
-          alt="{{request.user}}">
-        </div>
+        <img src="{{owner.profilePic.url}}" alt="" />
+      </div>
+      {% else %}
+      <div class="owner-img-div">
+        <img src={% static 'hostelmanagement/assets/images/upldImage.png'%}
+        alt="" />
+      </div>
+      {% endif %} 
         <a href="#">{{request.user}}</a>
       </div>
     </div>
