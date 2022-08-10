@@ -17,23 +17,6 @@
             </li>
             <li>
                 {% if owner %}
-                <a href={% url 'manage-hostels' %}>
-                    <span class="material-symbols-outlined">
-                        location_city
-                    </span>
-                    <h6>Manage Hostel</h6>
-                </a>
-                {% else %}
-                <button type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                    <span class="material-symbols-outlined">
-                        location_city
-                    </span>
-                    <h6>Manage Hostel</h6>
-                </button>
-                {% endif %}
-            </li>
-            <li>
-                {% if owner %}
                 <a href="{% url 'hostel-details' %}">
                     <span class="material-symbols-outlined">
                         details
@@ -83,6 +66,25 @@
                 </button>
                 {% endif %}
             </li>
+            <li>
+                {% if owner %}
+                <a href={% url 'manage-hostels' %}>
+                    <span class="material-symbols-outlined">
+                        location_city
+                    </span>
+                    <h6>Manage Hostel</h6>
+                </a>
+                {% else %}
+                <button type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                    <span class="material-symbols-outlined">
+                        location_city
+                    </span>
+                    <h6>Manage Hostel</h6>
+                </button>
+                {% endif %}
+            </li>
+            
+            
             <li>
                 <a href="{% url 'profile' %}">
                     <span class="material-symbols-outlined">
