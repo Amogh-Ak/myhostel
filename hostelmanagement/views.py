@@ -151,7 +151,7 @@ class Dashboard(View):
         #     obj_sample["rooms"] = res
         #     obj_sample["hostel"] = value.name
         #     list_sample.append(obj_sample)
-
+        print(data.__len__)
         context = {
             "owner":owner,
             "data":data,
@@ -175,8 +175,8 @@ def manageHostels(request):
         if 'Approved' in p.status:
             results.append(p)   
     owner = OwnerDetail.objects.get(usr=request.user)
-    print(owner)
-    context ={
+    
+    context ={ 
         "hostels":results,
         "owner":owner
     }
@@ -220,6 +220,10 @@ def addHostel(request):
                 resRoom.append(val[0])
             hostel.room.set(resRoom)
 
+            for p in resRoom:
+                p.hostel_name = hostel.name
+                p.save()
+
             return HttpResponseRedirect(request.path_info)
         else:
             print(form.cleaned_data)
@@ -239,6 +243,9 @@ def addHostel(request):
 def hostelsUpdate(request, pk):
     room = Hostel.objects.get(id=pk)
     form = HostelForm(instance=room)
+    hostelDetails = HostelDetail.objects.filter(usr=request.user)
+    allfacilities = Facilities.objects.all()
+    rooms = Room.objects.filter(usr=request.user)
 
 
     if request.method == "POST":     
@@ -253,7 +260,10 @@ def hostelsUpdate(request, pk):
 
     context = {
         "form":form,
-        "owner":owner
+        "owner":owner,
+        "hostelDetails":hostelDetails,
+        "facilities":allfacilities,
+        "rooms":rooms,
 
     }
 
@@ -399,7 +409,7 @@ def hostelDetailsUpdate(request, pk):
     else:
         form = HostelDetailsForm(instance=room)
     owner = OwnerDetail.objects.get(usr=request.user)
-
+    print(form)
     context = {
         "form":form,
         "owner":owner

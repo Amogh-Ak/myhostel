@@ -48,13 +48,6 @@
       <div class="header-name">
         <h4>Hostel Details</h4>
       </div>
-      <div class="search-div">
-        <input type="text" placeholder="Search" />
-        <i class="fa fa-search-plus" aria-hidden="true"></i>
-      </div>
-      <div class="header-btn">
-        <button onclick="switchVisible();">Add Details</button>
-      </div>
     </div>
     <form method="POST" class="form-block">
       {% csrf_token %}
@@ -91,7 +84,6 @@
               name="visitors_allowed"
               id="visitors_allowed"
               value="{{form.visitors_allowed.value}}"
-              required
             />
           </div>
         </div>
@@ -101,7 +93,6 @@
           <input
             type="text"
             name="security_deposit"
-            required
             value="{{form.security_deposit.value}}"
           />
           <label htmlFor="name" class="label-name">
@@ -117,7 +108,6 @@
               type="checkbox"
               name="warden"
               id="warden"
-              required
               value="{{form.warden.value}}"
             />
           </div>

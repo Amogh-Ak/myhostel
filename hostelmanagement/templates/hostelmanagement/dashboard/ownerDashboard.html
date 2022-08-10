@@ -43,9 +43,12 @@
         </li>
       </div>
     </div>
-    {% if data|length > 2 %}
+    {% if data|length > 1 %}
+    <div class="intial-guide">
+      <p> Hey <small>{{request.user}}</small>, now your all good and set to go. Congrats from team MyHostel.com </p>
+    </div>
     <div class="chart-div">
-      <canvas id="myChart"></canvas>
+      <canvas id="myChart"></canvas>    
     </div>
     {% else %}
     <div class="intial-guide">
