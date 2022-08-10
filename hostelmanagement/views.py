@@ -102,6 +102,7 @@ class SingleHostelView(DetailView):
         hostel.views += 1
         hostel.save()
         owner = OwnerDetail.objects.get(usr=hostel.usr)
+        print(owner)
         context = {
             "hostel": hostel,
             "ownerDetail":owner,
@@ -248,9 +249,12 @@ def hostelsUpdate(request, pk):
             return HttpResponseRedirect('/dashboard/manage-hostel/')
     else:
         form = HostelForm(instance=room)
+    owner = OwnerDetail.objects.get(usr=request.user)
 
     context = {
         "form":form,
+        "owner":owner
+
     }
 
     return render(request,"hostelmanagement/dashboard/updates/hostelsUpdate.html",context)
@@ -322,9 +326,10 @@ def roomsUpdate(request, pk):
             return HttpResponseRedirect('/dashboard/rooms/')
     else:
         form = RoomForm(instance=room)
-
+    owner = OwnerDetail.objects.get(usr=request.user)
     context = {
         "form":form,
+        "owner":owner
     }
 
     return render(request,"hostelmanagement/dashboard/updates/roomsUpdate.html",context)
@@ -393,9 +398,11 @@ def hostelDetailsUpdate(request, pk):
             return HttpResponseRedirect('/dashboard/hostel-details/')
     else:
         form = HostelDetailsForm(instance=room)
+    owner = OwnerDetail.objects.get(usr=request.user)
 
     context = {
         "form":form,
+        "owner":owner
     }
 
     return render(request,"hostelmanagement/dashboard/updates/hostelDetailsUpdate.html",context)
@@ -444,9 +451,11 @@ def facilitiesUpdate(request, pk):
             return HttpResponseRedirect('/dashboard/facilities/')
     else:
         form = FacilityForm(instance=room)
+    owner = OwnerDetail.objects.get(usr=request.user)
 
     context = {
         "form":form,
+        "owner":owner
     }
 
     return render(request,"hostelmanagement/dashboard/updates/facilityUpdate.html",context)
@@ -476,7 +485,7 @@ def ownerProfile(request):
     
     context = {
         "form":form,
-        "Owner":own
+        "owner":own
     }
 
     return render(request,"hostelmanagement/dashboard/ownerProfile.html",context)
