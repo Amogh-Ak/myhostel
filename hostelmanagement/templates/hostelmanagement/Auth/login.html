@@ -17,12 +17,10 @@
       <div class="form-group">
         <p>{{form.username.label_tag}}</p>
         {% render_field form.username class="login-input" placeholder="Username" type="text" %}
-        <small class="text-danger">{{form.errors|striptags}}</small> <br> 
       </div>
       <div class="form-group">
         <p>{{form.password.label_tag}}</p>
         {% render_field form.password class="login-input" placeholder="Password" type="password" %}
-        <small class="text-danger">{{form.errors|striptags}}</small> <br> 
       </div>
      {% comment %} <small><a href="{% url 'resetPassword' %}">Forgot Password ?</a></small> <br> {% endcomment %}
      <input type="submit" class="logout-modal-btn" value="Login">
