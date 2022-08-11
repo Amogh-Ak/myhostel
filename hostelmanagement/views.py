@@ -38,6 +38,8 @@ def areas_info(request, data=None):
         hostels = Hostel.objects.filter(location=data)
     elif data == 'Malmaddi':
         hostels = Hostel.objects.filter(location=data)
+    elif data == "Gandhinagar":
+        hostels = Hostel.objects.filter(location=data)
     
     context = {
         "hostels":hostels,
