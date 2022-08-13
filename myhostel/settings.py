@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-xbt3k9@cesq6rj7kb+elmuk^ua34shu$bgvvpfliy6s@egkldm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -83,8 +83,12 @@ WSGI_APPLICATION = 'myhostel.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR / 'db.sqlite3')
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'myhostel',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        'USER': 'root',
+        'PASSWORD': 'Amoghak123',
     }
 }
 
