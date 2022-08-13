@@ -83,12 +83,12 @@ WSGI_APPLICATION = 'myhostel.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'myhostel',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-        'USER': 'root',
-        'PASSWORD': 'Amoghak123',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd825fsmvarsm7s',
+        'HOST': 'ec2-34-193-44-192.compute-1.amazonaws.com',
+        'PORT': '5432',
+        'USER': 'szjlhkmbqpwubt',
+        'PASSWORD': 'a82248991da9d25ae235760a88cdf89f079ddfac2550bc8b041f9818e56ff94c',
     }
 }
 
