@@ -9,7 +9,9 @@
 {% block content %}
     <section class="section-1">
         <div class="div-img">
-            <img src="{{hostel.images.url}}" alt="">
+            {% if hostel.images %}
+                <img src="{{hostel.images.url}}" alt="">
+            {% endif %}
         </div>
         <div class="div-abs">
             <div class="div-content">
@@ -144,7 +146,9 @@
                     <h5>Contact Owner</h5>
                     <div class="div-owner">
                         <div class="owner-pic">
+                            {% if ownerDetail.profilePic %}
                             <img src="{{ownerDetail.profilePic.url}}" alt="">
+                            {% endif %}
                         </div>
                         <div class="owner-detail">
                             <h5>Name : {{ownerDetail.name}}</h5>
